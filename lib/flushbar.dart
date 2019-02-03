@@ -240,7 +240,12 @@ class _FlushbarRoute<T> extends OverlayRoute<T> {
         _timer.cancel();
       }
       _timer = new Timer(flushbar.duration, () {
-        navigator.pop();
+        if(isCurrent){
+          navigator.pop();
+        }else{
+          flushbar.duration = Duration(seconds: 1);
+          _configureTimer();
+        }
       });
     } else {
       if (_timer != null) {
